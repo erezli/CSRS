@@ -31,7 +31,7 @@ class Lineage:
 
     def plot(self):
         for t, l, d, x in zip(self.times, self.lineages, self.divisions_t, self.divisions_idx):
-            plt.plot(t, l)
+            plt.plot(t, l) #, '0.5', '-', label="'original'")
             plt.vlines(d, 0, np.array(l)[x], '0.5', 'dashed')
         plt.show()
 
@@ -48,9 +48,11 @@ class Lineage:
     def find_division(self, samples, times, i, height=None, threshold=None, distance=None, plot=True):
         idx, _ = scipy.signal.find_peaks(samples[i], height=height, threshold=threshold, distance=distance)
         if plot:
-            plt.plot(times[i], samples[i])
+            plt.plot(times[i], samples[i], label="sampled")
             plt.plot(times[i][idx], samples[i][idx], "x", label="measured division")
             plt.plot(self.divisions_t[i], self.lineages[i][np.array(self.divisions_idx[i])], "o", label="true division")
+            # plt.plot(times[i][idx], samples[i][idx], "x")
+            # plt.plot(self.divisions_t[i], self.lineages[i][np.array(self.divisions_idx[i])], "o")
             plt.legend()
             plt.show()
         return idx
