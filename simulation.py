@@ -33,13 +33,14 @@ class Simulation:
                             # delta2 = 0.5 * (divide.Delta + np.random.normal(self.Delta_m[0], self.Delta_m[1]))
                             # tau1 = 0.5 * (divide.tau + np.random.normal(self.tau_m[0], self.tau_m[1]))
                             # tau2 = 0.5 * (divide.tau + np.random.normal(self.tau_m[0], self.tau_m[1]))
-                            delta1 = 0.5 * (divide.Delta - self.Delta_m[0]) + np.random.normal(0, self.Delta_m[1]) \
+                            c = 0.1
+                            delta1 = c * (divide.Delta - self.Delta_m[0]) + np.random.normal(0, self.Delta_m[1]) \
                                      + self.Delta_m[0]
-                            delta2 = 0.5 * (divide.Delta - self.Delta_m[0]) + np.random.normal(0, self.Delta_m[1]) \
+                            delta2 = c * (divide.Delta - self.Delta_m[0]) + np.random.normal(0, self.Delta_m[1]) \
                                      + self.Delta_m[0]
-                            tau1 = 0.5 * (divide.tau - self.tau_m[0]) + np.random.normal(0, self.tau_m[1]) \
+                            tau1 = c * (divide.tau - self.tau_m[0]) + np.random.normal(0, self.tau_m[1]) \
                                    + self.tau_m[0]
-                            tau2 = 0.5 * (divide.tau - self.tau_m[0]) + np.random.normal(0, self.tau_m[1]) \
+                            tau2 = c * (divide.tau - self.tau_m[0]) + np.random.normal(0, self.tau_m[1]) \
                                    + self.tau_m[0]
                             # add noise in division volume
                             daughter1 = Cell(divide.v[-1]/2, delta1, tau1, divide, i, self.fila)
@@ -50,17 +51,18 @@ class Simulation:
                             self.all_cells.append(daughter2)
                     else:
                         if divide:
+                            c = 0.3
                             # delta1 = 0.5 * (divide.Delta + np.random.normal(self.Delta_m[0], self.Delta_m[1]))
                             # delta2 = 0.5 * (divide.Delta + np.random.normal(self.Delta_m[0], self.Delta_m[1]))
                             # tau1 = 0.5 * (divide.tau + np.random.normal(self.tau_m[0], self.tau_m[1]))
                             # tau2 = 0.5 * (divide.tau + np.random.normal(self.tau_m[0], self.tau_m[1]))
-                            delta1 = 0.5 * (divide.Delta - self.Delta_m[0]) + np.random.normal(0, self.Delta_m[1]) \
+                            delta1 = c * (divide.Delta - self.Delta_m[0]) + np.random.normal(0, self.Delta_m[1]) \
                                      + self.Delta_m[0]
-                            delta2 = 0.5 * (divide.Delta - self.Delta_m[0]) + np.random.normal(0, self.Delta_m[1]) \
+                            delta2 = c * (divide.Delta - self.Delta_m[0]) + np.random.normal(0, self.Delta_m[1]) \
                                      + self.Delta_m[0]
-                            tau1 = 0.5 * (divide.tau - self.tau_m[0]) + np.random.normal(0, self.tau_m[1]) \
+                            tau1 = c * (divide.tau - self.tau_m[0]) + np.random.normal(0, self.tau_m[1]) \
                                    + self.tau_m[0]
-                            tau2 = 0.5 * (divide.tau - self.tau_m[0]) + np.random.normal(0, self.tau_m[1]) \
+                            tau2 = c * (divide.tau - self.tau_m[0]) + np.random.normal(0, self.tau_m[1]) \
                                    + self.tau_m[0]
                             daughter1 = Cell(divide.v[-1] / 2, delta1, tau1, divide, i, self.fila)
                             daughter2 = Cell(divide.v[-1] / 2, delta2, tau2, divide, i, self.fila)

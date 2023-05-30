@@ -1,6 +1,7 @@
 import numpy as np
 import random
 from scipy.stats import expon
+from scipy.stats import poisson
 
 
 class Cell:
@@ -20,7 +21,13 @@ class Cell:
         self.filamentation = random.choices([True, False], weights=[fila, 1 - fila])[0]
         if self.filamentation:
             # self.fila_Delta = random.uniform(1.001, 5.5) * Delta
-            self.fila_Delta = (1 + expon.rvs(0, 1/1.2, 1)) * Delta
+            # self.fila_Delta = 0.5 * (poisson.rvs(0.02, 2, 1)) * Delta
+            # self.fila_Delta = (poisson.rvs(0.02, 1, 1)) * Delta
+            self.fila_Delta = (expon.rvs(1, 0.25, 1)) * Delta
+            offest_p = 0.002
+            if random.choices([True, False], weights=[offest_p, 1 - offest_p])[0]:
+                # very long cell
+                self.fila_Delta = random.uniform(1, 8) * Delta
 
     def growth_rate(self, dt):
         return 2 ** (dt/self.tau)   # add uncertainty
